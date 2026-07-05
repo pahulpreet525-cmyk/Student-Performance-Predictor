@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Performance Predictor | by pahulpreet</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">📊 EduPredict</div>
+        <div class="tagline">by pahulpreet</div>
+    </nav>
+
+    <div class="container">
+
+        <div class="card">
+            <h1>Student Performance Predictor</h1>
+            <p class="subtitle">AI-powered exam score prediction based on study habits</p>
+
+            <form id="predictForm" action="/predict" method="POST">
+
+                <div class="input-group">
+                    <label>Hours Studied (per week)</label>
+                    <input type="number" name="hours" min="0" max="80" step="0.5" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Attendance (%)</label>
+                    <input type="number" name="attendance" min="0" max="100" step="0.1" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Previous Exam Score</label>
+                    <input type="number" name="previous" min="0" max="100" step="0.1" required>
+                </div>
+
+                <button type="submit" id="predictBtn">
+                    <span id="btnText">Predict Score</span>
+                    <span id="btnLoader" class="loader hidden"></span>
+                </button>
+
+            </form>
+
+            {% if prediction %}
+            <div class="result show">
+                <div class="result-label">Predicted Exam Score</div>
+                <div class="result-score">{{ prediction }}</div>
+            </div>
+            {% endif %}
+
+        </div>
+
+        <footer>
+            Built with Flask + scikit-learn &middot; © 2026 pahulpreet
+        </footer>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
